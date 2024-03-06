@@ -74,6 +74,26 @@ spark.sql(f"GRANT WRITE VOLUME ON VOLUME training.data.crimes TO `{groupname}`")
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC
+# MAGIC ### Setup taxinyc_trips schema
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC use catalog training;
+# MAGIC create schema IF NOT EXISTS taxinyc_trips;
+
+# COMMAND ----------
+
+spark.sql(f"GRANT USE_SCHEMA ON SCHEMA training.taxinyc_trips TO `{groupname}`")
+
+# COMMAND ----------
+
+spark.sql(f"GRANT SELECT ON SCHEMA training.taxinyc_trips TO `{groupname}`")
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # Grant select on files to users
 # MAGIC
 # MAGIC Needed to avoid `java.lang.SecurityException: User does not have permission SELECT on any file.`

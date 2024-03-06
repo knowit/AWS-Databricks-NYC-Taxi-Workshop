@@ -7,7 +7,6 @@
 # MAGIC
 # MAGIC Load data from csv and save in `training.fram.trips`.
 # MAGIC
-# MAGIC Beskrivelsen av datasettet fra Christine:
 # MAGIC Datasettet beskriver alle avganger, per stasjon fra 1.1.24 frem til i dag. Dette inkluderer hvor mange som går av og på hver stasjon, samt antall om bord mellom stasjonene. Uttrekket inneholder også kapasitet slik at man kan beregne hvor fullt toget er.
 # MAGIC Og følgende kolonnebeskrivelser:
 # MAGIC

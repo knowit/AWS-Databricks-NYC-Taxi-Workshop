@@ -94,6 +94,28 @@ spark.sql(f"GRANT SELECT ON SCHEMA training.taxinyc_trips TO `{groupname}`")
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC
+# MAGIC ### Setup fram schema
+# MAGIC
+# MAGIC Only used for Norwegian transport sector
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC use catalog training;
+# MAGIC create schema IF NOT EXISTS fram;
+
+# COMMAND ----------
+
+spark.sql(f"GRANT USE_SCHEMA ON SCHEMA training.fram TO `{groupname}`")
+
+# COMMAND ----------
+
+spark.sql(f"GRANT SELECT ON SCHEMA training.fram TO `{groupname}`")
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # Grant select on files to users
 # MAGIC
 # MAGIC Needed to avoid `java.lang.SecurityException: User does not have permission SELECT on any file.`

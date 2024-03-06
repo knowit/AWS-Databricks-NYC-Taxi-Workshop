@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC # Delta Live Table example
+# MAGIC # Delta Live Tables example
 # MAGIC
 # MAGIC Delta Live Tables is managed compute DBT-like ETL framework.
 # MAGIC
@@ -95,3 +95,7 @@ def trips_by_month_and_borough():
       .groupBy("pickup_borough", "trip_month")
       .count()
   )
+
+# COMMAND ----------
+
+

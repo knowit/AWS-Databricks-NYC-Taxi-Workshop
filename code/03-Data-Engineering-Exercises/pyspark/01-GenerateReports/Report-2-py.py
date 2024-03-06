@@ -201,6 +201,12 @@ trips_df.groupBy("pickup_borough").agg(
 # MAGIC %md
 # MAGIC
 # MAGIC # Bonus Exercises
+# MAGIC
+# MAGIC Do this AFTER you are done with the other tasks in 01-GenerateReports:
+# MAGIC
+# MAGIC * 02-Fram-data-oppgaver
+# MAGIC * 03-DeployJob
+# MAGIC * 04-DLTDataQuality
 
 # COMMAND ----------
 

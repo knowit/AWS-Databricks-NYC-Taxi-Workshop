@@ -26,6 +26,12 @@
 
 # COMMAND ----------
 
+# MAGIC %sql
+# MAGIC DROP TABLE IF EXISTS entur_gtfs_stops;
+# MAGIC CREATE TABLE IF NOT EXISTS entur_gtfs_stops;
+
+# COMMAND ----------
+
 # MAGIC %sh head -2 /Volumes/training/data/fram/Uttrekk\ TDS.csv
 
 # COMMAND ----------
@@ -121,6 +127,52 @@ fram_df_w_floats.display()
 .mode("overwrite").format("delta")
 .option("overwriteSchema", "true")
 .saveAsTable("training.fram.trips")
+)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC
+# MAGIC ## Load Entur GTFS stops data
+# MAGIC
+# MAGIC Example:
+# MAGIC ```
+# MAGIC stop_id,stop_name,stop_lat,stop_lon,stop_desc,location_type,parent_station,wheelchair_boarding,vehicle_type,platform_code
+# MAGIC NSR:Quay:1,Oslo S Trelastgata,59.909548,10.755250,,,NSR:StopPlace:2,1,700,
+# MAGIC ```
+
+# COMMAND ----------
+
+FRAM_SCHEMA = StructType([
+    StructField("stop_id", StringType(), True),
+    StructField("stop_name", StringType(), True),
+    StructField("stop_lat", FloatType(), True),
+    StructField("stop_lon", FloatType(), True),
+    StructField("stop_desc", StringType(), True),
+    StructField("location_type", StringType(), True),
+    StructField("parent_station", StringType(), True),
+    StructField("wheelchair_boarding", StringType(), True),
+    StructField("vehicle_type", StringType(), True),
+    StructField("platform_code", StringType(), True),
+])
+
+# COMMAND ----------
+
+src_file = "/Volumes/training/data/fram/entur_gtfs_stops.csv"
+stops = (sqlContext.read.format("csv")
+         .option("header", True)
+         .schema(FRAM_SCHEMA)
+         .option("delimiter",",")
+         .load(src_file).cache())
+stops.display()
+
+# COMMAND ----------
+
+(stops
+.write
+.mode("overwrite").format("delta")
+.option("overwriteSchema", "true")
+.saveAsTable("training.fram.entur_gtfs_stops")
 )
 
 # COMMAND ----------

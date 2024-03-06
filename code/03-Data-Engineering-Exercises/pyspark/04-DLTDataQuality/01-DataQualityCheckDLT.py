@@ -40,6 +40,7 @@ from pyspark.sql.functions import *
 # MAGIC * Notebook source: Find this notebook
 # MAGIC * Destination: Unity Catalog
 # MAGIC * Catalog: `training`
+# MAGIC * Schema: Don't select anything
 # MAGIC * Policy: `dlt-training-policy`
 # MAGIC * Cluster mode: `Enhanced autoscaling`
 # MAGIC * Min workers: 1
@@ -58,8 +59,13 @@ from pyspark.sql.functions import *
 # MAGIC %md
 # MAGIC ## Observe failed records
 # MAGIC
-# MAGIC In the DLT run view, press the Curated data set and observe the expectations fail rate, 
-# MAGIC which should be about 36%.
+# MAGIC In the DLT run view, press the Curated data set. Look on the Data Quality tab, and observe the expectations fail rate, which should be about 52%.
+# MAGIC
+# MAGIC This is becuase data from June 2016 did not have `pickup_borough` while July has it.
+# MAGIC
+# MAGIC The second step `trips_by_month_and_borough()` will fail hard because it has the expectation
+# MAGIC `expect_or_fail()`, while `curated()` uses the weaker `expect()`, which allows failing records.
+# MAGIC A third alternative is to use `expect_or_drop()`.
 
 # COMMAND ----------
 
@@ -69,17 +75,21 @@ from pyspark.sql.functions import *
 # MAGIC Run job again to ensure there are no failing expectations.
 # MAGIC
 # MAGIC Tip: use `fillna()` function with pickup_borough as subset arg.
+# MAGIC
+# MAGIC ``````python
+# MAGIC .fillna(value="Unknown",subset=["pickup_borough"])
+# MAGIC ``````
 
 # COMMAND ----------
 
 @dlt.table(table_properties={"quality": "silver"})
-@dlt.expect_or_fail("pickup_borough_not_null", "pickup_borough IS NOT NULL")
+@dlt.expect("pickup_borough_not_null", "pickup_borough IS NOT NULL")
 def curated():
   return (
     spark.table("training.taxinyc_trips.yellow_taxi_trips_curated")
     .where(
         # limit dataset to get faster processing
-        "trip_year = 2016 and trip_month == '02'"
+        "trip_year = 2016 and trip_month in ('06', '07')"
     )
   )
 

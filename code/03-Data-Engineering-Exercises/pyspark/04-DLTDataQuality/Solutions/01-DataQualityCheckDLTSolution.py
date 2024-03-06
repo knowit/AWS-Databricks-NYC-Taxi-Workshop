@@ -71,7 +71,7 @@ from pyspark.sql.functions import *
 # COMMAND ----------
 
 @dlt.table(table_properties={"quality": "silver"})
-@dlt.expect_or_fail("pickup_borough_not_null", "pickup_borough IS NOT NULL")
+@dlt.expect("pickup_borough_not_null", "pickup_borough IS NOT NULL")
 def curated():
   return (
     spark.table("training.taxinyc_trips.yellow_taxi_trips_curated")

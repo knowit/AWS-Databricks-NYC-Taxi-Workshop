@@ -19,8 +19,12 @@ from pyspark.sql import functions as F
 
 # COMMAND ----------
 
-trips_df = spark.sql("select * from trainingbanenor.fram.trips")
+trips_df = spark.sql("select * from training.fram.trips")
 trips_df.display()
+
+# COMMAND ----------
+
+# https://storage.googleapis.com/marduk-production/tiamat/Current_latest-gtfs.zip
 
 # COMMAND ----------
 

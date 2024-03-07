@@ -1,7 +1,7 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # What's in this exercise?
-# MAGIC We will do some exercises on the FRAM-dataset.
+# MAGIC We will do some exercises on the FRAM-dataset for train information.
 # MAGIC
 # MAGIC Only used for the transport sector in Norway.
 # MAGIC
@@ -10,11 +10,27 @@
 # MAGIC Datasettet beskriver alle avganger, per stasjon fra 1.1.24 frem til i dag. Dette inkluderer hvor mange som går av og på hver stasjon, samt antall om bord mellom stasjonene. Uttrekket inneholder også kapasitet slik at man kan beregne hvor fullt toget er.
 # MAGIC Og følgende kolonnebeskrivelser:
 # MAGIC
+# MAGIC * Date (date) - date of journey
+# MAGIC * DatedServiceJourneyId (string) - Dated journey ID
+# MAGIC * PlannedDepartureTime (timestamp) - Planned departure time
+# MAGIC * ActualDepartureTime (timestamp)
+# MAGIC * LineName: string
+# MAGIC * TrainNumber: string
+# MAGIC * OriginJdirCode: string
+# MAGIC * DestinationJdirCode: string
+# MAGIC * StopJdirCode - Jdir stoppestedkode
+# MAGIC * StopNSRID - NSRID stoppestedkode
+# MAGIC * NextStopNSRID: string
+# MAGIC * StopLocationLatitude: string
+# MAGIC * StopLocationLongitude: float
+# MAGIC * StopSequence: int
+# MAGIC * WorkingDay: int
 # MAGIC * CapacityNormal - Normal kapasitet på toget 
 # MAGIC * CapacityTheoretical - Teoretisk kapasitet på toget
 # MAGIC * BoardingsOutputAdjusted - antall påstigende
 # MAGIC * AlightingsOutputAdjusted - antall avstigende
 # MAGIC * PaxOutputAdjusted – antall om bord på toget
+# MAGIC
 
 # COMMAND ----------
 

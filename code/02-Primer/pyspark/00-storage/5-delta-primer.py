@@ -16,6 +16,17 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## DO NOW:
+# MAGIC
+# MAGIC 1. Select a cluster ("UC Shared Cluster N")
+# MAGIC   2. Where N is the group number you have been asigned by the teacher
+# MAGIC   3. If you are doing this course async, use `UC Shared Cluster 1`
+# MAGIC 2. Press start on the cluster if it is not running
+# MAGIC 3. Press the `Run all` button so the notebook starts processing while you study the code
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ##What is Delta Lake?
 # MAGIC
 # MAGIC

@@ -140,6 +140,18 @@ trips_df.groupBy("pickup_borough").agg(
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC
+# MAGIC # Bonus Exercises
+# MAGIC
+# MAGIC Do this AFTER you are done with the other tasks in 01-GenerateReports:
+# MAGIC
+# MAGIC * 02-FramData
+# MAGIC * 03-DeployJob
+# MAGIC * 04-DLTDataQuality
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ### 8.  Count trips with no tip, by pickup_borough
 # MAGIC `tip_amount` is the tip column
 
@@ -195,18 +207,6 @@ trips_df.groupBy("pickup_borough").agg(
 # COMMAND ----------
 
 
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC
-# MAGIC # Bonus Exercises
-# MAGIC
-# MAGIC Do this AFTER you are done with the other tasks in 01-GenerateReports:
-# MAGIC
-# MAGIC * 02-Fram-data-oppgaver
-# MAGIC * 03-DeployJob
-# MAGIC * 04-DLTDataQuality
 
 # COMMAND ----------
 

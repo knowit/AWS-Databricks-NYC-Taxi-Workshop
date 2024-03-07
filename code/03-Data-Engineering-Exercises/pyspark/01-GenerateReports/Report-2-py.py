@@ -203,6 +203,8 @@ trips_df.groupBy("pickup_borough").agg(
 
 # MAGIC %md
 # MAGIC ### 12. Visualize the pickup hour distribution per pickup_borough
+# MAGIC
+# MAGIC Use the visualize button next to Table, by pressing the + sign.
 
 # COMMAND ----------
 

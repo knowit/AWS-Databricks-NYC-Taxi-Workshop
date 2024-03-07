@@ -15,7 +15,7 @@
 # MAGIC Dataset: https://data.cityofchicago.org/api/views/ijzp-q8t2/rows.csv?accessType=DOWNLOAD<br>
 # MAGIC Metadata: https://cosmosdbworkshops.blob.core.windows.net/metadata/ChicagoCrimesMetadata.pdf<br>
 # MAGIC   
-# MAGIC Referenes for Databricks:<br>
+# MAGIC References for Databricks:<br>
 # MAGIC Visualization: https://docs.databricks.com/visualizations/charts-and-graphs-python.html
 
 # COMMAND ----------

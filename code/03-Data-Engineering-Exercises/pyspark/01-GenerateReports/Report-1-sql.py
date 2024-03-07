@@ -118,6 +118,11 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC # Bonus exercises
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ### 8. Count trips with no tip, by by pickup_borough
 # MAGIC `tip_amount` is the tip column
 
@@ -167,8 +172,7 @@
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC # Bonus exercises
+
 
 # COMMAND ----------
 

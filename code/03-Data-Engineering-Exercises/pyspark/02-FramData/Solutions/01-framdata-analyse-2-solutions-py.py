@@ -42,7 +42,7 @@ trips_df.display()
 
 # COMMAND ----------
 
-trips_df.groupBy("OriginJdirCode").count().display()
+trips_df.groupBy("OriginJdirCode").count().sort(F.col("count").desc()).display()
 
 # COMMAND ----------
 
@@ -50,7 +50,7 @@ trips_df.groupBy("OriginJdirCode").count().display()
 # MAGIC
 # MAGIC ### 2. Combine with station names to get better report
 # MAGIC
-# MAGIC We will extract the station names from a remote zip file.
+# MAGIC We will extract the station names from Entur stop registry. This is public data from developer.entur.no. Loading of this data can be seen in 00-Admin-Prep
 
 # COMMAND ----------
 
@@ -84,18 +84,62 @@ trips_df.select("StopJdirCode", "StopNSRID").distinct().display()
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ### 1.1.  Join with stop name
 
+# COMMAND ----------
+
+# Joining the `trips_df` with `stops_df` on `stop_id` column
+trips_df.join(stops_df, trips_df.StopNSRID == stops_df.stop_id).select("StopJdirCode", "StopNSRID", "stop_name").distinct().display()
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### 2. Trip counts with station names
-# MAGIC Show a table with trip counts per combination of start and stop destination.
-# MAGIC Get station names from the stops dataset, combining them the stop code dataset.
+# MAGIC ### 2. Boarding and alightings at Oslo S
+# MAGIC Show a table with alighting and boarding sums pr day at Oslo S (NSR:StopPlace:337). 
+# MAGIC
+# MAGIC Test different visualizations to disply the results. 
+# MAGIC
+# MAGIC How is variation depending on workdays?
 
 # COMMAND ----------
 
-trips_df.select("origin")
+boardings_alightings_df = trips_df.select(
+    "Date",
+    "WorkingDay",
+    "ActualDepartureTime",
+    F.col("BoardingsOutputAdjusted"), 
+    F.col("AlightingsOutputAdjusted")).where(F.col("StopNSRID") == "NSR:StopPlace:337")
+
+boardings_alightings_df.display();
+
+
+
+# COMMAND ----------
+
+boardings_alightings_df.groupBy(F.col("Date")).agg(
+    F.round(F.sum(F.col("BoardingsOutputAdjusted"))).alias("Sum boardings"), 
+    F.round(F.sum(F.col("AlightingsOutputAdjusted"))).alias("Sum alightings")
+    ).sort(F.col("Sum boardings").desc()).display()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Bonus Exercises
+# MAGIC
+# MAGIC We recomment you do this AFTER you are done with the other tasks:
+# MAGIC 03-DeployJob
+# MAGIC 04-DLTDataQuality
+# MAGIC
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### 1. Between which station pairs are the capacity above > 90%?
+# MAGIC
+# MAGIC When considering "CapacityNormal"
+# MAGIC
+# MAGIC
 
 # COMMAND ----------
 
